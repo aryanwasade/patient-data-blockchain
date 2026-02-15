@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Data Management</title>
+</head>
+<body>
+    <h2>Add Medical Record</h2>
+    <form id="recordForm">
+        Patient ID: <input type="text" id="patientId"><br>
+        Doctor ID: <input type="text" id="doctorId"><br>
+        Diagnosis: <input type="text" id="diagnosis"><br>
+        Prescription: <input type="text" id="prescription"><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("recordForm").onsubmit = async function(e) {
+            e.preventDefault();
+
+            const data = {
+                patientId: document.getElementById("patientId").value,
+                doctorId: document.getElementById("doctorId").value,
+                diagnosis: document.getElementById("diagnosis").value,
+                prescription: document.getElementById("prescription").value
+            };
+
+            await fetch("http://127.0.0.1:5000/add_record", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            alert("Record Added to Blockchain!");
+        };
+    </script>
+</body>
+</html>
